@@ -2,7 +2,7 @@ var cash;
     var lemons;
     var lemonade;
     var timer;
-    var timeLimit = 60000; // 2 minutes
+    var timeLimit = 60000; // 1 minutes
     var gameOver = false;
 
     function startGame() {
@@ -42,9 +42,9 @@ var cash;
     function buyLemons() {
       if (!gameOver) {
         if (cash >= 1) {
-          // Buy a lemon and update the budget and lemon count
-          cash -= 1;
-          lemons += 1;
+          // Buy a lemon and update the cash and lemon count
+          cash -= 2;
+          lemons += 3;
           document.getElementById("cash").innerHTML = "Cash: $" + cash;
           document.getElementById("lemons").innerHTML = "Lemons: " + lemons;
         } else {
@@ -95,6 +95,6 @@ var cash;
         document.getElementById("result").innerHTML = "Congratulations! You raised $150 for charity!";
       } else {
         // Display a game over message if the player loses
-        document.getElementById("result").innerHTML = "Game over! You didn't reach double your budget.";
+        document.getElementById("result").innerHTML = "Game over! You didn't reach $150.";
       }
     }
