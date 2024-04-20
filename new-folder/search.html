@@ -8,6 +8,7 @@
     table {
         border-collapse: collapse;
         width: 100%;
+        margin-bottom: 20px;
     }
     th, td {
         border: 1px solid #dddddd;
@@ -23,52 +24,134 @@
 
 <h2>Charity Fundraiser Causes</h2>
 
-<!-- Search input box -->
-<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for causes..">
+<!-- Form for search input -->
+<form>
+    <label for="searchInput">Search: </label>
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for causes..">
+</form>
 
-<!-- Table to display causes -->
-<table id="causesTable">
+<!-- Table for Cause Type 1 -->
+<table id="causeType1">
     <thead>
         <tr>
             <th>Description</th>
+            <th>Category</th>
+            <th>Duration</th>
+            <th>Organization</th>
+            <th>Charity Type</th>
         </tr>
     </thead>
     <tbody>
-        <!-- Table rows filled with cause descriptions -->
-        <tr><td>Clean water access for rural communities</td></tr>
-        <tr><td>Education for underprivileged children</td></tr>
-        <tr><td>Support for victims of natural disasters</td></tr>
-        <tr><td>Medical assistance for low-income families</td></tr>
-        <tr><td>Animal welfare and protection</td></tr>
-        <tr><td>Environmental conservation projects</td></tr>
+        <!-- Table rows for Cause Type 1 -->
+    </tbody>
+</table>
+
+<!-- Table for Cause Type 2 -->
+<table id="causeType2">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Duration</th>
+            <th>Organization</th>
+            <th>Charity Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Table rows for Cause Type 2 -->
     </tbody>
 </table>
 
 <script>
-// JavaScript function to search and filter the table
+// Define constructor functions for cause objects
+function CauseType1(description, category, duration, organization, charityType) {
+    this.description = description;
+    this.category = category;
+    this.duration = duration;
+    this.organization = organization;
+    this.charityType = charityType;
+}
+
+function CauseType2(description, location, duration, organization, charityType) {
+    this.description = description;
+    this.location = location;
+    this.duration = duration;
+    this.organization = organization;
+    this.charityType = charityType;
+}
+
+// Initialize arrays to store cause objects
+var causesType1 = [
+    new CauseType1("Clean water access for rural communities", "Water", "Temporary", "Charity Water", "Fundraiser"),
+    new CauseType1("Education for underprivileged children", "Education", "Ongoing", "Save the Children", "Event"),
+    new CauseType1("Support for victims of natural disasters", "Disaster Relief", "Temporary", "Red Cross", "Supplying Goods")
+];
+
+var causesType2 = [
+    new CauseType2("Medical assistance for low-income families", "City Hospital", "Ongoing", "Doctors Without Borders", "Fundraiser"),
+    new CauseType2("Animal welfare and protection", "Animal Shelter", "Ongoing", "ASPCA", "Event"),
+    new CauseType2("Environmental conservation projects", "Local Parks", "Temporary", "Greenpeace", "Fundraiser")
+];
+
+// Function to display causes in the table
+function displayCauses() {
+    displayCausesOfType(causesType1, "causeType1");
+    displayCausesOfType(causesType2, "causeType2");
+}
+
+function displayCausesOfType(causeArray, tableId) {
+    var table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+    table.innerHTML = ''; // Clear existing table rows
+    causeArray.forEach(function(cause) {
+        var row = table.insertRow();
+        var descriptionCell = row.insertCell(0);
+        var propertyCell1 = row.insertCell(1);
+        var propertyCell2 = row.insertCell(2);
+        var propertyCell3 = row.insertCell(3);
+        var propertyCell4 = row.insertCell(4);
+        descriptionCell.textContent = cause.description;
+        propertyCell1.textContent = cause.category || cause.location;
+        propertyCell2.textContent = cause.duration;
+        propertyCell3.textContent = cause.organization;
+        propertyCell4.textContent = cause.charityType;
+    });
+}
+
+// Call displayCauses function to initially display causes
+displayCauses();
+
+// Function to search and filter the table
 function searchTable() {
-    // Declare variables
-    var input, filter, table, tr, td, i, txtValue;
+    var input, filter, tables, tr, td, i, txtValue;
     input = document.getElementById("searchInput"); // Get the search input element
     filter = input.value.toUpperCase(); // Convert input text to uppercase for case-insensitive search
-    table = document.getElementById("causesTable"); // Get the table element
-    tr = table.getElementsByTagName("tr"); // Get all table rows
+    tables = document.querySelectorAll("table");
     
-    // Loop through all table rows, and hide those that don't match the search query
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0]; // Get the first cell (description) of each row
-        if (td) {
-            txtValue = td.textContent || td.innerText; // Get the text content of the cell
-            // Check if the text content matches the search filter
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = ""; // Display the row if it matches
-            } else {
-                tr[i].style.display = "none"; // Hide the row if it doesn't match
+    tables.forEach(function(table) {
+        tr = table.getElementsByTagName("tr"); // Get all table rows
+        
+        // Loop through all table rows, and hide those that don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            var found = false;
+            // Loop through all cells in current row
+            for (var j = 0; j < tr[i].cells.length; j++) {
+                td = tr[i].cells[j]; // Get current cell
+                if (td) {
+                    txtValue = td.textContent || td.innerText; // Get the text content of the cell
+                    // Check if the text content matches the search filter
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        found = true;
+                        break; // If found in this cell, no need to check other cells in this row
+                    }
+                }
             }
-        }       
-    }
+            // Show or hide the row based on search result
+            tr[i].style.display = found ? "" : "none";
+        }
+    });
 }
 </script>
 
 </body>
 </html>
+
