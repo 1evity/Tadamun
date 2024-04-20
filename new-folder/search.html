@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charity Fundraiser Causes</title>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+
+<h2>Charity Fundraiser Causes</h2>
+
+<!-- Search input box -->
+<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for causes..">
+
+<!-- Table to display causes -->
+<table id="causesTable">
+    <thead>
+        <tr>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Table rows filled with cause descriptions -->
+        <tr><td>Clean water access for rural communities</td></tr>
+        <tr><td>Education for underprivileged children</td></tr>
+        <tr><td>Support for victims of natural disasters</td></tr>
+        <tr><td>Medical assistance for low-income families</td></tr>
+        <tr><td>Animal welfare and protection</td></tr>
+        <tr><td>Environmental conservation projects</td></tr>
+    </tbody>
+</table>
+
+<script>
+// JavaScript function to search and filter the table
+function searchTable() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput"); // Get the search input element
+    filter = input.value.toUpperCase(); // Convert input text to uppercase for case-insensitive search
+    table = document.getElementById("causesTable"); // Get the table element
+    tr = table.getElementsByTagName("tr"); // Get all table rows
+    
+    // Loop through all table rows, and hide those that don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0]; // Get the first cell (description) of each row
+        if (td) {
+            txtValue = td.textContent || td.innerText; // Get the text content of the cell
+            // Check if the text content matches the search filter
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = ""; // Display the row if it matches
+            } else {
+                tr[i].style.display = "none"; // Hide the row if it doesn't match
+            }
+        }       
+    }
+}
+</script>
+
+</body>
+</html>
