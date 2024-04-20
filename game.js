@@ -92,9 +92,9 @@ var cash;
 
       if (won) {
         // Display a congratulatory message if the player wins
-        document.getElementById("result").innerHTML = "Congratulations! You raised $150 for charity!";
+        document.getElementById("result").innerHTML = "Congratulations! You raised $160 for charity!";
       } else {
         // Display a game over message if the player loses
-        document.getElementById("result").innerHTML = "Game over! You didn't reach $150.";
+        document.getElementById("result").innerHTML = "Game over! You didn't reach $160.";
       }
     }
