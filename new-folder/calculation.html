@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Charity Fundraising ROI & CPDR Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fundraising ROI Calculator</h1>
+    <label for="revenue">Revenue Generated ($):</label>
+    <input type="number" id="revenue" placeholder="Enter revenue amount">
+    <label for="expenses">Expenses Incurred ($):</label>
+    <input type="number" id="expenses" placeholder="Enter expenses amount">
+    <button onclick="calculateROI()">Calculate ROI</button>
+    <button onclick="calculateCPDR()">Calculate CPDR</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateROI() {
+      var revenue = document.getElementById("money raised").value;
+      var expenses = document.getElementById("expenses").value;
+      
+      if (revenue !== "" && expenses !== "") {
+        var roi = (revenue / expenses).toFixed(2);
+        document.getElementById("result").innerHTML = "Fundraising ROI: " + roi;
+      } else {
+        document.getElementById("result").innerHTML = "Please enter both money raised and expenses.";
+      }
+    }
+    
+    function calculateCPDR() {
+      var revenue = document.getElementById("money raised").value;
+      var expenses = document.getElementById("expenses").value;
+      
+      if (revenue !== "" && expenses !== "") {
+        var cpdr = (expenses / revenue).toFixed(2);
+        document.getElementById("result").innerHTML = "Cost per Dollar Raised: " + cpdr;
+      } else {
+        document.getElementById("result").innerHTML = "Please enter both money raised and expenses.";
+      }
+    }
+  </script>
+</body>
+</html>

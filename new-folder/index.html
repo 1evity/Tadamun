@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Homepage</title>
+</head>
+<body>
+
+  <main>
+
+    <div class="banner">
+        <p id="banner-text"></p>
+    </div>
+
+    <p>
+      Check out our new interactive pages:
+    </p>
+
+  </main>
+
+
+  <script>
+    // JS for updating banner text
+    // included inline for brevity
+
+    // Banner text
+    function updateBanner() {
+    const date = new Date();
+    document.getElementById("banner-text").innerText = `Welcome! Today is ${date.toDateString()}`;
+    }
+
+    setInterval(updateBanner, 1000);
+
+
+    // Image slider
+    let currentImage = 0; 
+
+    const images = document.querySelectorAll('.gallery img');
+
+    function nextImage() {
+    images[currentImage].style.display = "none";
+    currentImage++;
+
+    if(currentImage >= images.length) {
+        currentImage = 0;
+    }
+
+    images[currentImage].style.display = "block";  
+    }
+
+    function startSlider() {
+    setInterval(nextImage, 3000);
+    nextImage(); 
+    }
+
+    startSlider();
+
+  </script>
+
+  <section class="gallery">
+  
+    <img id="img1" src="image1.jpg">
+    <img id="img2" src="image2.jpg">
+    <img id="img3" src="image3.jpg">
+
+  </section>
+
+
+  <nav>
+    <a href="questionnaire.html">Questionnaire</a> 
+    <a href="calculation.html">Calculator</a>
+    <a href="funpage.html">Fun Page</a>
+  </nav>
+
+  <footer>
+    Copyright My Website
+  </footer>
+
+</body>
+</html>
