@@ -62,7 +62,7 @@ var cash;
           lemonade += 1;
           document.getElementById("lemons").innerHTML = "Lemons: " + lemons;
           document.getElementById("lemonade").innerHTML = "Lemonade: " + lemonade;
-          setTimeout(sellLemonade, 8000); // Set a timer to sell the lemonade after 8 seconds
+          setTimeout(lemonade--, 6000); // Set a timer to "spoil" the lemonade after 6 seconds
         } else {
           // Show an alert if there are not enough lemons to make lemonade
           alert("Not enough lemons to make lemonade!");
