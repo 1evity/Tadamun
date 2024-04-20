@@ -75,7 +75,7 @@ var cash;
         if (lemonade >= 1) {
           // Sell a lemonade, update the budget and lemonade count
           lemonade -= 1;
-          cash += 5;
+          cash += 4;
           document.getElementById("cash").innerHTML = "Cash: $" + cash;
           document.getElementById("lemonade").innerHTML = "Lemonade: " + lemonade;
         }
